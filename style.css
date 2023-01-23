@@ -1,0 +1,74 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+body {
+  background: grey;
+  /* overflow: hidden; */
+  margin: 30px;
+}
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: flex-start;
+}
+.card {
+  background: white;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+h2,
+p {
+  margin: 0;
+  color: black;
+}
+h2 {
+  margin-bottom: 1rem;
+}
+
+.cutoff-text {
+  --max-lines: 5;
+  --line-height: 1.4;
+  overflow: hidden;
+  max-height: calc(var(--max-lines) * 1em * var(--line-height));
+  line-height: var(--line-height);
+  position: relative;
+  /* display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-lines); */
+}
+.cutoff-text::before {
+  content: "";
+  position: absolute;
+  height: calc(1em * var(--line-height));
+  width: 100%;
+  bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, white);
+}
+.expand-btn {
+  appearance: none;
+  border: 1px solid grey;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  margin-top: 1em;
+}
+.expand-btn:hover {
+  background-color: #ccc;
+}
+
+.expand-btn::before {
+  content: "expand";
+}
+.expand-btn:checked::before {
+  content: "collapse";
+}
+
+.cutoff-text:has(+ .expand-btn:checked){
+    max-height: none;
+}
